@@ -3,393 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G3N - 3rd Generation Intelligence</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <title>Video Background Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000;
-            color: #fff;
-        }
-        .bg-gray-900{
-            background-color: #000;
-        }
-        .text-gray-100{
-            color: #fff;
-        }
-        .product-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
-        }
-        .product-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        @media (min-width: 768px) {
-            .product-section {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: flex-start;
-            }
-            .product-image {
-                margin-bottom: 0;
-                margin-right: 20px;
-                max-width: 40%;
-            }
-            .product-text-content {
-                max-width: 55%;
-            }
-        }
-        #problem {
-            background-color: rgba(255, 255, 0, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        #goals {
-            padding-bottom: 20px;
-        }
-
-        .timeline {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 2rem;
-        }
-
-        .timeline-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
+        body, html {
             height: 100%;
-            background-color: #4a5568;
+            margin: 0;
+            font-family: 'Ubuntu', sans-serif;
+            overflow: hidden;
         }
 
-        .timeline-item:last-child::before {
-            height: 0;
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
         }
 
-        .timeline-content {
-            background-color: #2d3748;
-            border-radius: 8px;
-            padding: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 80%;
-            max-width: 300px;
-            position: relative;
-            z-index: 1;
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
         }
 
-        .timeline-content h3 {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #fff;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-content p {
-            font-size: 0.9rem;
-            color: #cbd5e0;
-        }
-
-        .timeline-icon {
-            width: 2rem;
-            height: 2rem;
-            border-radius: 50%;
-            background-color: #6b7280;
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: transparent; /* Make navbar fully transparent */
+            padding: 10px 20px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            color: #fff;
-            margin-bottom: 0.5rem;
+            z-index: 10;
+            box-sizing: border-box;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
             position: relative;
             z-index: 1;
+            text-align: center;
+            color: white;
+            padding: 400px 20px;
         }
-        .timeline-icon svg{
-            width: 1.2rem;
-            height: 1.2rem;
+
+        .content h1 {
+            font-size: 4.5em;
+            font-weight: 300;
+            letter-spacing: 2px;
         }
 
-        @media (min-width: 768px) {
-            .timeline {
-                flex-direction: row;
+        .content p {
+            font-size: 1.4em;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content button {
+            padding: 12px 24px;
+            font-size: 1.2em;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .content button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+                padding: 10px;
             }
 
-            .timeline-item {
-                flex-direction: row;
-                align-items: center;
-                margin-bottom: 0;
+            .navbar a {
+                margin: 5px 10px;
             }
 
-            .timeline-item::before {
-                left: 0;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 100%;
-                height: 4px;
+            .content h1 {
+                font-size: 3em;
             }
 
-            .timeline-content {
-                text-align: left;
-                margin-left: 2rem;
-                max-width: 400px;
+            .content p {
+                font-size: 1.2em;
             }
-             .timeline-item:nth-child(2n) .timeline-content{
-                margin-left: 0;
-                margin-right: 2rem;
-             }
-            .timeline-icon {
-                margin-bottom: 0;
-                margin-right: 2rem;
-            }
-            .timeline-item:nth-child(2n) .timeline-icon{
-                margin-left: 2rem;
-                margin-right: 0;
-            }
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
         }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-100">
-    <header class="bg-gradient-to-r from-purple-700 to-blue-700 py-4 px-6 md:px-10 lg:px-12">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-2xl font-semibold text-white">
-                <svg width="155" height="54" viewBox="0 0 155 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20.56 20.32H50.08V31.6V54H26.96C19.76 54 13.04 51.36 8 46.4C2.8 41.44 5.96046e-08 34.8 5.96046e-08 27.68C5.96046e-08 20.56 2.8 13.92 8 8.88C13.04 4 19.76 1.28 26.96 1.28H49.92V12.48H24.64C16.88 13.6 11.04 20.08 11.04 27.68C11.04 35.2 16.88 41.68 24.64 42.8H38.8V31.6H25.76L25.12 30.32L21.92 23.36L20.56 20.32ZM100.767 27.52C101.567 28.48 102.207 29.6 102.687 30.72C103.647 32.88 104.207 35.2 104.207 37.52C104.207 40.48 103.407 43.36 101.967 45.92C99.1669 50.64 94.2069 53.68 88.7669 54C88.4469 54 88.0469 54 87.7269 54C87.4069 54 87.0069 54 86.6869 54H58.0469V42.4H89.0869C91.1669 41.76 92.6869 39.76 92.6869 37.52C92.6869 36.24 92.1269 34.96 91.2469 34H61.9669V22.4H88.4469C89.0069 22.32 89.4869 22.08 89.9669 21.84H90.0469C90.0469 21.84 90.0469 21.84 90.1269 21.76C91.6469 20.96 92.6069 19.28 92.6069 17.52C92.6069 15.12 90.8469 13.04 88.4469 12.72H58.0469V1.04H87.7269C90.6069 1.04 93.4869 1.84 95.9669 3.28C98.4469 4.72 100.447 6.72 101.887 9.12C101.887 9.12 101.887 9.2 101.967 9.2C103.407 11.76 104.207 14.64 104.207 17.52C104.207 20.48 103.407 23.36 101.887 25.92C101.567 26.48 101.167 27.04 100.767 27.52ZM112.188 54V24.96L123.388 36.16V54H112.188ZM143.788 1.12H154.988V54H152.267L144.348 46.08L131.068 32.8L123.388 25.12L112.188 13.92V7.2V2.16V0.799998H114.908L143.788 29.6V1.12Z" fill="white"></path>
-                </svg>
-            </a>
-            <nav class="hidden md:block">
-                <ul class="flex space-x-6">
-                    <li><a href="#problem" class="hover:text-gray-300 transition duration-300">Problem</a></li>
-                    <li><a href="#goals" class="hover:text-gray-300 transition duration-300">Goals</a></li>
-                    <li><a href="#product" class="hover:text-gray-300 transition duration-300">Product</a></li>
-                    <li><a href="#team" class="hover:text-gray-300 transition duration-300">Team</a></li>
-                    <li><a href="#contact" class="hover:text-gray-300 transition duration-300">Contact</a></li>
-                </ul>
-            </nav>
-            <button id="hamburger-btn" class="md:hidden text-gray-300 focus:outline-none" aria-label="Toggle Navigation">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
+<body>
 
-            </button>
-        </div>
-    </header>
-
-    <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-90 z-50">
-        <div class="bg-gray-950 w-80 h-full absolute right-0 p-6">
-            <div class="flex justify-end mb-4">
-                <button id="close-menu-btn" class="text-gray-300 focus:outline-none" aria-label="Close Menu">
-                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-            <nav class="block">
-                <ul class="space-y-4">
-                    <li><a href="#problem" class="block text-lg text-gray-300 hover:text-white transition duration-300">Problem</a></li>
-                    <li><a href="#goals" class="block text-lg text-gray-300 hover:text-white transition duration-300">Goals</a></li>
-                    <li><a href="#product" class="block text-lg text-gray-300 hover:text-white transition duration-300">Product</a></li>
-                    <li><a href="#team" class="block text-lg text-gray-300 hover:text-white transition duration-300">Team</a></li>
-                    <li><a href="#contact" class="block text-lg text-gray-300 hover:text-white transition duration-300">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
+    <div class="video-background">
+        <video autoplay muted loop>
+            <source src="your-video.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
     </div>
 
-    <main class="container mx-auto px-6 md:px-10 lg:px-12 py-8">
-        <section id="hero" class="text-center py-16">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 bg-gradient-to-r from-purple-500 to-blue-500 text-transparent bg-clip-text">
-                The 3rd Gen Intelligence and General Purpose Humanoid
-            </h1>
-            <p class="text-lg text-gray-300 mb-8">
-                Revolutionizing human life through advanced robotics and AI.
-            </p>
-            <a href="#product" class="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold py-3 px-6 rounded-full transition duration-300">
-                Learn More About G3N
-            </a>
-        </section>
+    <div class="navbar">
+        <svg width="155" height="54" viewBox="0 0 155 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.56 20.32H50.08V31.6V54H26.96C19.76 54 13.04 51.36 8 46.4C2.8 41.44 5.96046e-08 34.8 5.96046e-08 27.68C5.96046e-08 20.56 2.8 13.92 8 8.88C13.04 4 19.76 1.28 26.96 1.28H49.92V12.48H24.64C16.88 13.6 11.04 20.08 11.04 27.68C11.04 35.2 16.88 41.68 24.64 42.8H38.8V31.6H25.76L25.12 30.32L21.92 23.36L20.56 20.32ZM100.767 27.52C101.567 28.48 102.207 29.6 102.687 30.72C103.647 32.88 104.207 35.2 104.207 37.52C104.207 40.48 103.407 43.36 101.967 45.92C99.1669 50.64 94.2069 53.68 88.7669 54C88.4469 54 88.0469 54 87.7269 54C87.4069 54 87.0069 54 86.6869 54H58.0469V42.4H89.0869C91.1669 41.76 92.6869 39.76 92.6869 37.52C92.6869 36.24 92.1269 34.96 91.2469 34H61.9669V22.4H88.4469C89.0069 22.32 89.4869 22.08 89.9669 21.84H90.0469C90.0469 21.84 90.0469 21.84 90.1269 21.76C91.6469 20.96 92.6069 19.28 92.6069 17.52C92.6069 15.12 90.8469 13.04 88.4469 12.72H58.0469V1.04H87.7269C90.6069 1.04 93.4869 1.84 95.9669 3.28C98.4469 4.72 100.447 6.72 101.887 9.12C101.887 9.12 101.887 9.2 101.967 9.2C103.407 11.76 104.207 14.64 104.207 17.52C104.207 20.48 103.407 23.36 101.887 25.92C101.567 26.48 101.167 27.04 100.767 27.52ZM112.188 54V24.96L123.388 36.16V54H112.188ZM143.788 1.12H154.988V54H152.267L144.348 46.08L131.068 32.8L123.388 25.12L112.188 13.92V7.2V2.16V0.799998H114.908L143.788 29.6V1.12Z" fill="white"></path>
+        </svg>
+        <a href="mailto:d@g3n3ration.com">Contact</a>
+      
+    </div>
 
-        <section id="problem" class="py-12">
-            <h2 class="text-3xl font-semibold text-white text-center mb-8">Problem</h2>
-            <p class="text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto text-center">
-                Human societies require labor to maintain and grow their economies. Since labor is limited and its production uncontrollable, achieving unlimited labor would lead to both economic growth and the availability of nearly free products and services.
-            </p>
-        </section>
+    <div class="content">
+        <h1>Hi, I am your AI home assistant</h1>
+    </div>
 
-        <section id="goals" class="py-12">
-            <h2 class="text-3xl font-semibold text-white text-center mb-8">Our 4 Milestones</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-gray-800 rounded-lg p-6 shadow-md">
-                    <h3 class="text-xl font-semibold text-white mb-4">Building Humanoid Robots For Home (2025)</h3>
-                    <p class="text-gray-300">Automating household tasks and improving daily life.</p>
-                </div>
-                <div class="bg-gray-800 rounded-lg p-6 shadow-md">
-                    <h3 class="text-xl font-semibold text-white mb-4">Westworld-Like Humanoid (2027)</h3>
-                    <p class="text-gray-300">Creating advanced humanoids for entertainment and companionship.</p>
-                </div>
-                <div class="bg-gray-800 rounded-lg p-6 shadow-md">
-                    <h3 class="text-xl font-semibold text-white mb-4">AGI Via Brain Emulation And Bio Computing (2030)</h3>
-                    <p class="text-gray-300">Achieving artificial general intelligence through cutting-edge research.</p>
-                </div>
-                <div class="bg-gray-800 rounded-lg p-6 shadow-md">
-                    <h3 class="text-xl font-semibold text-white mb-4">Humanoid For Mars Settlement (2028)</h3>
-                    <p class="text-gray-300">Developing robots to assist in the colonization of Mars.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="product" class="py-12">
-            <h2 class="text-3xl font-semibold text-white text-center mb-8">Product</h2>
-            <div class="bg-gray-800 rounded-lg p-6 shadow-md product-section">
-                <img src="Weixin Image_20250314200821.png" alt="G3N Robot Bailey" class="product-image">
-                <div class="product-text-content">
-                    <h3 class="text-2xl font-semibold text-white mb-4">Bailey</h3>
-                    <p class="text-lg text-gray-300 mb-4">
-                        Introducing Bailey, our cutting-edge semi-humanoid robot, powered by a sophisticated Vision-Language-Action (VLA) model. Bailey represents a significant leap forward in robotics, effectively unifying perception, language understanding, and learned control. This integration enables Bailey to perform a wide range of tasks with remarkable proficiency.
-                    </p>
-                    <p class="text-xl font-semibold text-white mb-4"><span class="text-yellow-400">~US$10,000</span></p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <h4 class="text-lg font-semibold text-gray-200 mb-2">Key Specifications</h4>
-                            <ul class="list-disc list-inside text-gray-300">
-                                <li>Weight: 30 Kg (66.1 Lbs)</li>
-                                <li>Height: 160 Cm (4' 71")</li>
-                                <li>Battery Life: 2 hours</li>
-                                <li>Degrees of Freedom: 20</li>
-                                 <li>Mobility: 2m/s</li>
-                                <li>Max. Torque: 120 N.M</li>
-                                <li>Autonomy Level: L2</li>
-                                <li>Teleoperation: Smartphone</li>
-                                <li>Software Updates: Over-the-air (OTA)</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-semibold text-gray-200 mb-2">Core Capabilities</h4>
-                            <ul class="list-disc list-inside text-gray-300">
-                                <li>Versatile Assistance (household tasks, etc.)</li>
-                                <li>Elderly and Childcare Support</li>
-                                <li>Interactive Education</li>
-                                <li>Entertainment Delivery</li>
-                                <li>Safety and Security</li>
-                                <li>Item Transport</li>
-                                <li>Remote Operation</li>
-                                <li>And More</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
-
-        <section id="team" class="py-12">
-            <h2 class="text-3xl font-semibold text-white text-center mb-8">Team</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-gray-800 rounded-lg p-6 shadow-md">
-                    <h3 class="text-xl font-semibold text-white mb-4">Danny Ng</h3>
-                    <p class="text-gray-300 mb-2">Founder, CEIO (Chief Efficiency and Innovation Officer)</p>
-                    <p>Self-taught serial founder, high school dropout, and visionary pioneering AI, robotics, and biocomputing.</p>
-                    <a href="https://www.linkedin.com/in/dannyngwsh/" class="text-blue-400 hover:text-blue-300 transition duration-300 inline-block">LinkedIn</a>
-                </div>
-                <div class="bg-gray-800 rounded-lg p-6 shadow-md">
-                    <h3 class="text-xl font-semibold text-white mb-4">Jaideep (JD) Chouhan</h3>
-                    <p class="text-gray-300 mb-2">Lead Mechatronic Engineer</p>
-                    <a href="https://www.linkedin.com/in/jd0214/" class="text-blue-400 hover:text-blue-300 transition duration-300 inline-block">LinkedIn</a>
-                </div>
-                <div class="bg-gray-800 rounded-lg p-6 shadow-md">
-                    <h3 class="text-xl font-semibold text-white mb-4">Aman Sharma</h3>
-                    <p class="text-gray-300 mb-2">Electronics Engineer & AI Lead</p>
-                    <a href="https://www.linkedin.com/in/aman-sharma-7b41422b3/" class="text-blue-400 hover:text-blue-300 transition duration-300 inline-block">LinkedIn</a>
-                </div>
-                <div class="bg-gray-800 rounded-lg p-6 shadow-md">
-                    <h3 class="text-xl font-semibold text-white mb-4">Liang Xian Bo</h3>
-                    <p class="text-gray-300 mb-2">Manufacturing Engineer</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="py-12">
-            <h2 class="text-3xl font-semibold text-white text-center mb-8">Contact</h2>
-            <p class="text-lg text-gray-300 text-center">Email: <a href="mailto:d@g3n3ration.com" class="text-blue-400 hover:text-blue-300 transition duration-300">d@g3n3ration.com</a></p>
-        </section>
-
-    </main>
-
-    <footer class="bg-gray-900 py-6 text-center">
-        <p class="text-gray-400">© 2025 G3N Robot. All rights reserved.</p>
-    </footer>
-
-    <script>
-        const hamburgerBtn = document.getElementById("hamburger-btn");
-        const mobileMenu = document.getElementById("mobile-menu");
-        const closeMenuBtn = document.getElementById("close-menu-btn");
-        const mobileMenuLinks = mobileMenu.querySelectorAll("a");
-        const navLinks = document.querySelectorAll('.nav-links a');
-        const sections = document.querySelectorAll('section');
-
-        function toggleMobileMenu() {
-            mobileMenu.classList.toggle("hidden");
-        }
-
-        hamburgerBtn.addEventListener("click", toggleMobileMenu);
-        closeMenuBtn.addEventListener("click", toggleMobileMenu);
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener("click", toggleMobileMenu);
-        });
-
-        document.addEventListener('click', (event) => {
-            if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(event.target) && event.target !== hamburgerBtn) {
-                toggleMobileMenu();
-            }
-        });
-
-        function updateActiveNavLink() {
-            let currentSectionId = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (window.scrollY >= sectionTop - 100 && window.scrollY < sectionTop + sectionHeight - 100) {
-                    currentSectionId = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').slice(1) === currentSectionId) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', updateActiveNavLink);
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
 </body>
 </html>
